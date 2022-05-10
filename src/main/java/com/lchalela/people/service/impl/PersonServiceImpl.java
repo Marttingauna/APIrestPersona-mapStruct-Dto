@@ -27,6 +27,7 @@ public class PersonServiceImpl implements PersonService {
     private PersonMapper personMapper;
 
     @Override
+    // Metodo para obtener una persona por su id.(En este caso retorna un objeto de tipo PersonDto)
     public PersonDto getPersonById(Long id) {
         return personMapper.toDto(personRepository.findById(id).orElseThrow(
                 ()-> new NotFoundException(messageUtil.getMessage("notFound",null, Locale.getDefault()))
@@ -39,7 +40,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
 
-    @Transactional
+    @Transactional // Para que se ejecute en una transaccion de base de datos. es decir que se guarde en la base de datos y no se ejecute en dos pasos.
     @Override
     public void savePerson(PersonDto personDto) {
         /* Utiliza el mapeo para convertir el objeto de tipo PersonDto a un objeto de tipo Person. 
